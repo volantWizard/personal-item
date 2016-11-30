@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+body,
+p {
+	margin: 0;
+}
+@-webkit-keyframes rotate {
+	0% {
+		-webkit-transform: rotateY(0deg);
+	}
+	100% {
+		-webkit-transform: rotateY(360deg);
+	}
+}
+@keyframes rotate {
+	0% {
+		transform: rotateY(0deg);
+	}
+	100% {
+		transform: rotateY(360deg);
+	}
+}
+.wrap {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	-webkit-perspective: 600px;
+	perspective: 600px;
+}
+#loading {
+	position: absolute;
+	left: 33%;
+	top: 35%;
+	width: 34%;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+#loadingImg {
+	width: 100%;
+	display: block;
+	-webkit-animation: 3s rotate linear infinite;
+	animation: 2s rotate linear infinite;
+}
+#loading p {
+	font-size: 16px;
+	text-align: center;
+	line-height: 30px;
+} 
+#logo2,
+#logo3 {
+	position: absolute;
+	left: 25%;
+	top: 40%;
+	width: 50%;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform: scale(0);
+	transform: scale(0);
+}	
+#logo2Img,
+#logo3Img {
+	width: 100%;
+	display: block;
+	-webkit-animation: 3s rotate linear infinite;
+	animation: 2s rotate linear infinite;
+}
+#logo4,
+.logoIcos{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transform: scale(0);
+	transform: scale(0);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.logoIcos {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+.logoIcos span {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 50px;
+	height: 50px;
+	background: center center no-repeat;
+	background-size: contain;
+}
+</style>
+</head>
+<body>
+<section class="wrap">
+	<div id="loading">
+		<img src="load/logo.png" id="loadingImg" />
+		<p>已加载 0%</p>
+	</div>
+	<div id="logo2">
+		<img src="load/logo2.png" id="logo2Img" />
+	</div>
+	<div id="logo4">
+		
+	</div>
+</section>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+(function(){
+	var data = [
+		"load/logo2.png",
+		"load/logo3.png",
+		"load/logo4.png",
+		"load/loadIco1.png",
+		"load/loadIco2.png",
+		"load/loadIco3.png",
+		"load/loadIco4.png",
+		"load/loadIco5.png",
+		"load/loadIco6.png",
+		"load/loadIco7.png",
+		"load/loadIco8.png",
+		"load/loadIco9.png",
+		"bg/1.png",
+		"bg/2.png",
+		"bg/3.png",
+		"bg/4.png",
+		"bg/5.png",
+		"bg/6.png",
+		"bg/7.png",
+		"bg/8.png",
+		"bg/9.png",
+		"bg/10.png",
+		"bg/11.png",
+		"bg/12.png",
+		"bg/13.png",
+		"bg/14.png",
+		"bg/15.png",
+		"bg/16.png",
+		"bg/17.png",
+		"bg/18.png",
+		"bg/19.png",
+		"bg/20.png"
+	];
+	var loading = document.querySelector('#loading');
+	var logo2 = document.querySelector('#logo2');
+	var logo4 = document.querySelector('#logo4');
+	var img = document.querySelector('#loading img');
+	var text = document.querySelector('#loading p');
+	var loadOver = 0;
+	css(loading,"scale",100);
+	css(logo2,"scale",0);
+	css(logo4,"scale",0);
+	for(var i = 0; i < data.length; i++){
+		var newImg = new Image();
+		newImg.src = data[i];
+		newImg.onload = function(){
+			loadOver++;
+			//console.log(loadOver);
+			text.innerHTML = "已加载 "+Math.round(loadOver/data.length*100)+"%";
+			if(loadOver == data.length){
+				showLogo2();
+			}
+		};
+	}
+	function showLogo2(){
+		MTween(loading,{scale:20},500,"easeOut",function(){
+			MTween(logo2,{scale:100},500,"easeIn");
+			loading.parentNode.removeChild(loading);
+			setTimeout(function(){
+				showLogo3();
+			},2000);
+		});
+	}
+	function showLogo3(){
+		MTween(logo2,{scale:20},500,"easeOut",function(){
+				setTimeout(function(){
+					logo2.children[0].src = "load/logo3.png";
+					MTween(logo2,{scale:100},300,"easeIn");
+					setTimeout(function(){
+						showLogo4()
+					},2000);
+				},800);
+		});
+	}
+	function showLogo4(){
+		var iCons = document.createElement("div");
+		var logo = new Image();
+		iCons.className = "logoIcos";
+		logo.src= "load/logo4.png";
+		logo.style.cssText = "width:60%;position:absolute;left:50%;top:50%;-webkit-transform: translateX(-50%) translateY(-50%);transform: translateX(-50%) translateY(-50%);";
+		for(var i = 0; i < 18; i++){
+			var span = document.createElement("span");
+			var R = 100+Math.round(Math.random()*200);
+			var degX = i*20 + parseInt((Math.random()-.5)*20);
+			var degY = parseInt(Math.random()*360);
+			var y = Math.round(Math.sin(degX*Math.PI/180)*R);
+			var z = Math.round(Math.cos(degX*Math.PI/180)*R);
+			console.log(y,z);
+			span.style.transform = "rotateY("+degY+"deg) translate3d(0,"+y+"px,"+z+"px) rotateX("+degX+"deg)";
+			span.style.backgroundImage = "url(load/loadIco"+(i%9+1)+".png)";
+			iCons.appendChild(span);
+		}
+		logo4.appendChild(iCons);
+		logo4.appendChild(logo);
+		MTween(logo2,{scale:20},500,"easeOut",function(){
+				setTimeout(function(){
+					MTween(logo4,{scale:100},300,"easeIn");
+					MTween(iCons,{rotateY:360},2000,"easeOut");
+					logo2.parentNode.removeChild(logo2);
+					setTimeout(function(){
+						MTween(logo4,{scale:0},1000,"easeOut");
+					},700);
+				},800);
+		});
+	}
+})();
+/*
+ translate3d(-50%, -50%, 0px) translate3d(-51.567px, -279.001px, 428.009px) rotateX(-173.07deg) rotateY(-153.54deg) rotateZ(-83.98deg) scale3d(1.08, 0.42, 0.01);
+translate3d(-50%, -50%, 0px) translate3d(105.518px, -233.704px, 316.645px) rotateX(-174.59deg) rotateY(-24.54deg) rotateZ(145.49deg) scale3d(0.56, 0.94, 0.01);
+*/
+</script>
+</body>
+</html>
