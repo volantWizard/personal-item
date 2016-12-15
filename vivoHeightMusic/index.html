@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box {
+				
+			    position: absolute;
+			    transform: translate3d(-50%, -50%, 0px) translate3d(385.75px, 296.32px, -163.74px) rotateX(0deg) rotateY(-67deg) rotateZ(0deg) scale3d(1, 1, 1);
+			    transform-style: preserve-3d;
+			    width: 400px;
+			    height: 487px;
+			    transform-origin: 50% 50% 0px;
+			    opacity: 1;
+			    display: block;
+			    background-image: url("http://act.vivo.com.cn/qqmusic/textures/52.png")
+			}
+			#box1 {
+			    position: absolute;
+			    transform: translate3d(-50%, -50%, 0px) translate3d(385.75px, 296.32px, -163.74px) rotateX(0deg) rotateY(-67deg) rotateZ(0deg) scale3d(1, 1, 1);
+			    transform-style: preserve-3d;
+			    width: 400px;
+			    height: 487px;
+			    transform-origin: 50% 50% 0px;
+			    opacity: 0;
+			    display: block;
+			    background-image: url("http://act.vivo.com.cn/qqmusic/textures/53.png");
+			}
+			
+		</style>
+		<script src="../canvas动画效果/jquery-2.2.4.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<audio loop="loop" autoplay="autoplay">
+			<source src="music/0.mp3" type="audio/mpeg">
+		</audio>
+		<div id="box">
+			
+		</div>
+		<div id="box1">
+			
+		</div>
+		<script type="text/javascript">
+			setInterval(function (){
+				if ($('#box').css('opacity') === '1' ) {
+					$('#box').css('opacity','0');
+					$('#box1').css('opacity','1');
+				}else {
+					$('#box').css('opacity','1');
+					$('#box1').css('opacity','0');
+				}
+			},500)
+		</script>
+	</body>
+</html>
