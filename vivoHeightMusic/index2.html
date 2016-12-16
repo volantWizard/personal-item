@@ -16,7 +16,7 @@
     charset（编码）：指定网页的编码是utf-8。-->
 		<meta name="" http-equiv="content-type" content="text/html"/>
     	<link rel="stylesheet" type="text/css" href="src/css/imusic.css"/>
-		<script src="src/js/full-rem.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="src/js/moudlejs/full-rem.js" type="text/javascript" charset="utf-8"></script>-->
 	</head>
 	<body>
 		<div class="main">
@@ -71,22 +71,26 @@
 		<script type="text/javascript">
 			//seajs的配置
 			seajs.config({
-				//配置绝对路径
-				base:'',
+//				//配置基础路径
+				base:'./src/js',
 				//path-当目录比较深，或需要跨目录调用模块时，可以使用 paths 来简化书写。
 				//paths 配置可以结合 alias 配置一起使用，让模块引用非常方便。
 				paths:{
-					
+					'module':'module',
+					'main':'main'
 				},
-				//当模块标识很长时，可以使用 alias 来简化。
+//				//当模块标识很长时，可以使用 alias 来简化。
 				alias:{
-					
+					'zepto':'module/zepto.js'
 				},
-				
+				//使用 preload 配置项，可以在普通模块加载前，提前加载并初始化好指定模块。
+				preload:['zepto']
 			});
 			//加载入口模块
-			seajs.use()
-			
+			seajs.use(['main/main','main/full-view'],function (main,fullView){
+			    fullView.setView();
+			    main.init();
+			});	
 		</script>
 	</body>
 </html>
