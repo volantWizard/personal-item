@@ -50,21 +50,24 @@ img {
 	left: 101px;
 	top: 870px;
 	opacity: 0;
-	z-index: 999
+	z-index: 999;
+	transition: 300ms;
 }
 
 .line_text2 {
 	left: 101px;
 	top: 870px;
 	opacity: 0;
-	z-index: 999
+	z-index: 999;
+	transition: 300ms;
 }
 
 .line_text3 {
 	left: 101px;
 	top: 870px;
 	opacity: 0;
-	z-index: 999
+	z-index: 999;
+	transition: 300ms;
 }
 
 .music_f1 {

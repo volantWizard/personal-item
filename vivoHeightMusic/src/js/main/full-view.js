@@ -1,7 +1,8 @@
 define(function (require,exports,module){
 	var $ = require('zepto');
 	var setViewPort = function (){
-		var phoneWidth = parseInt(window.screen.width);
+		var phoneWidth = parseInt(window.screen.width),
+			phoneHeight = parseInt(window.screen.height);
 		var phoneScale = phoneWidth / 640 ;
 	    var html = document.querySelector('html');
 	    html.style.fontSize = phoneWidth/16 + 'px';
@@ -43,8 +44,10 @@ define(function (require,exports,module){
 		    if (window.devicePixelRatio) {
 		    	scale = scale/window.devicePixelRatio;
 		    }
-	    	$('<meta name="viewport" content="width=640,user-scalable=no" />').appendTo($('head'));
+	    	$('<meta name="viewport" content="width=640,user-scalable=no target-densitydpi=device-dpi" />').appendTo($('head'));
 	    }
+	    console.log(phoneHeight,phoneHeight*phoneScale,$(window).height());
 	}
-    exports.setView = setViewPort;
+	setViewPort();
+//	exports.set = {};
 })
